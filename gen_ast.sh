@@ -11,5 +11,6 @@ do
   input_file="data${path}"
   output_file="input${path}"
   echo $input_file $output_file
+
   clang++ -Xclang -ast-dump -fsyntax-only ${input_file} > ${output_file}
 done
