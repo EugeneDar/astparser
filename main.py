@@ -6,7 +6,7 @@ def refactor_line(input_str):
     return space + formatted
 
 
-file_name = "input/simple.cpp"
+file_name = "input/simple_loop.cpp"
 
 file = open(file_name, "r")
 
@@ -16,6 +16,7 @@ while True:
         break
     string = refactor_line(line.strip())
     print(string)
+    # print(line.strip())
 
 file.close()
 
