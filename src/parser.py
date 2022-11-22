@@ -44,8 +44,10 @@ def refactor_all_lines(filename):
             lines_list.append(pair)
 
     file.close()
+    return lines_list
 
 
 # main function
 def parse(filename):
-
+    lines = refactor_all_lines(filename)
+    print(lines)
