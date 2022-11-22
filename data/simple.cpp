@@ -1,4 +1,6 @@
+#include <iostream>
+
 int main () {
-    int a = 7;
-    int b = a - 5;
+    int a = 3;
+    int b = a + 7;
 }
