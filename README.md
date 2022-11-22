@@ -1,3 +1,5 @@
-How to get ast from file in command line
+#Quick start
 
-`clang++ -Xclang -ast-dump -fsyntax-only <file_name>`
+launch `clang++ -Xclang -ast-dump -fsyntax-only <file_name>`
+
+launch 'main.py'
