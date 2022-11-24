@@ -1,3 +1,3 @@
 from parser import parse
 
-parse("../input/simple_loop.cpp")
+parse("../input/simple_loop_2.cpp")

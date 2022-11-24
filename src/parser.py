@@ -7,27 +7,37 @@ class Object:
         self.nested_objects = []
 
 
+def refactor_action_name(action_name):
+    if action_name == "CXXNewExpr":
+        return "new operator"
+    if action_name == "VarDecl":
+        return "Variable declaration"
+    if action_name == "ForStmt":
+        return "For"
+    if action_name == "IfStmt":
+        return "If"
+    if action_name == "":
+        return ""
+    if action_name == "":
+        return ""
+    if action_name == "":
+        return ""
+
+    return ""
+
+
 def refactor_line(input_str):
     pos = input_str.find(next(filter(str.isalpha, input_str)))
 
     formatted = input_str[pos:]
     formatted = formatted[:formatted.find(" ")]
 
-    if formatted == "CXXNewExpr":
-        formatted = "new operator"
-    elif formatted == "ForStmt":
-        formatted = "For"
-    elif formatted == "VarDecl":
-        formatted = "Variable declaration"
-    else:
-        formatted = ""
+    action_name = refactor_action_name(formatted)
 
-    if formatted == "":
-        ret = (0, "")
+    if action_name == "":
+        return [0, ""]
     else:
-        ret = (pos * 2, formatted)
-
-    return ret
+        return [pos, action_name]
 
 
 def refactor_all_lines(filename):
@@ -47,7 +57,6 @@ def refactor_all_lines(filename):
     return lines_list
 
 
-# main function
 def parse(filename):
     lines = refactor_all_lines(filename)
-    print(lines)
+    return lines
