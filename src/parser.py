@@ -1,27 +1,28 @@
 # Step 5
 # this function should parse ast and return list
+from enum import Enum
 
-class Object:
-    def __init__(self, name):
-        self.name = name
-        self.nested_objects = []
+
+class Type(Enum):
+    VARIABLE_DECLARATION = "VARIABLE DECLARATION"
+    NEW_OPERATOR = "NEW OPERATOR"
+    FOR = "FOR"
+    WHILE = "WHILE"
+    IF = "IF"
+    OTHER = ""
 
 
 def refactor_action_name(action_name):
     if action_name == "CXXNewExpr":
-        return "new operator"
+        return Type.NEW_OPERATOR
     if action_name == "VarDecl":
-        return "Variable declaration"
+        return Type.VARIABLE_DECLARATION
     if action_name == "ForStmt":
-        return "For"
+        return Type.FOR
+    if action_name == "WhileStmt":
+        return Type.WHILE
     if action_name == "IfStmt":
-        return "If"
-    if action_name == "":
-        return ""
-    if action_name == "":
-        return ""
-    if action_name == "":
-        return ""
+        return Type.IF
 
     return ""
 
