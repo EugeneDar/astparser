@@ -5,8 +5,6 @@
 #include <list>
 #include <iostream>
 
-int FLAG_START_TRANSLATION;
-
 class iterator;
 
 template<class ValueType>

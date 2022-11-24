@@ -24,7 +24,7 @@ def refactor_action_name(action_name):
     if action_name == "IfStmt":
         return Type.IF
 
-    return ""
+    return Type.OTHER
 
 
 def refactor_line(input_str):
@@ -35,10 +35,7 @@ def refactor_line(input_str):
 
     action_name = refactor_action_name(formatted)
 
-    if action_name == "":
-        return [0, ""]
-    else:
-        return [pos, action_name]
+    return [pos, action_name]
 
 
 def refactor_all_lines(filename):
@@ -51,8 +48,7 @@ def refactor_all_lines(filename):
         if not line:
             break
         pair = refactor_line(line.strip())
-        if pair[1] != "":
-            lines_list.append(pair)
+        lines_list.append(pair)
 
     file.close()
     return lines_list
