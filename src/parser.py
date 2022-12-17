@@ -43,10 +43,22 @@ def refactor_all_lines(filename):
 
     lines_list = []
 
+    flag_counter = 0
+
     while True:
         line = file.readline()
         if not line:
             break
+
+        # remove includes
+        if 'INCLUDE_SECTION_START_FLAG_' in line:
+            flag_counter += 1
+
+        if flag_counter > 0:
+            if 'INCLUDE_SECTION_FINISH_FLAG' in line:
+                flag_counter -= 1
+            continue
+
         pair = refactor_line(line.strip())
         lines_list.append(pair)
 
