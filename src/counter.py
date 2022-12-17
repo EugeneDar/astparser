@@ -55,6 +55,7 @@ def count_allocations(lines_list):
             linear_allocations[0] += var_counter
             linear_allocations[1] += new_counter
 
-    print("IF ", if_allocations)
-    print("LOOP ", loop_allocations)
-    print("LINEAR", linear_allocations)
+    # print("IF ", if_allocations)
+    # print("LOOP ", loop_allocations)
+    # print("LINEAR", linear_allocations)
+    return [if_allocations, loop_allocations, linear_allocations]
