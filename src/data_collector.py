@@ -16,5 +16,6 @@ def collect ():
 
         full_name = item['full_name']
 
+        # maybe we will need repeat 'gh auth login' in command line
         command = "gh repo clone " + full_name + " ../data/" + full_name
         os.system(command)
