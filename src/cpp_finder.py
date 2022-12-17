@@ -9,6 +9,6 @@ def get_cpps_list ():
         for file in files:
             if file.endswith(".cc") or file.endswith(".cpp"):
                 cpp_files.append(str(os.path.join(root, file)))
-                print(os.path.join(root, file))
+                # print(os.path.join(root, file))
 
     return cpp_files
