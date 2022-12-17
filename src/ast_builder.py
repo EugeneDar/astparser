@@ -8,3 +8,4 @@ def build_ast(source_name):
     print(output_name)
     command = 'clang++ -Xclang -ast-dump -fsyntax-only ' + source_name + ' > ' + output_name
     os.system(command)
+    return output_name
