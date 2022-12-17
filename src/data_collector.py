@@ -1,4 +1,20 @@
 # Step 1
 # this function should find repos with cpp files and download them to temporary folder `data`
+import requests
+import os
 
-# def collect ():
+def collect ():
+    username = "eugenedar"
+    token = ""
+
+    r = requests.get('https://api.github.com/search/repositories?q=language:cpp&per_page:100', auth=(username, token))
+
+    for item in r.json()['items']:
+        size = item['size']  # size in Kb
+        if size > 5000:
+            continue
+
+        full_name = item['full_name']
+
+        command = "gh repo clone " + full_name + " ../data/" + full_name
+        os.system(command)
