@@ -9,7 +9,12 @@ def preprocess(file_name):
     lines = []
 
     while True:
-        line = file1.readline()
+        line = ''
+        try:
+            line = file1.readline()
+        except:
+            continue
+
         if not line:
             break
 
