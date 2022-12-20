@@ -59,7 +59,7 @@ def refactor_all_lines(filename):
                 flag_counter -= 1
             continue
 
-        pair = refactor_line(line.strip())
+        pair = refactor_line(line)
         lines_list.append(pair)
 
     file.close()
