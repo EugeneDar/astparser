@@ -4,6 +4,8 @@ import requests
 import os
 
 def collect ():
+    repos = list()
+
     username = "eugenedar"
     token = ""
 
@@ -11,7 +13,7 @@ def collect ():
 
     for item in r.json()['items']:
         size = item['size']  # size in Kb
-        if size > 5000:
+        if size > 3000:
             continue
 
         full_name = item['full_name']
@@ -19,3 +21,7 @@ def collect ():
         # maybe we will need repeat 'gh auth login' in command line
         command = "gh repo clone " + full_name + " ../data/" + full_name
         os.system(command)
+
+        repos.append("../data/" + full_name)
+
+    return repos

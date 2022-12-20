@@ -16,7 +16,7 @@ os.system(command)
 collect()
 
 # find all cpps
-cpps = get_cpps_list()
+cpps = get_cpps_list("../data")
 
 # preprocess (wrap includes)
 for file in cpps:
