@@ -8,6 +8,10 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
+# remove old data
+command = "rm -rf ../data && mkdir ../data && rm -rf ../input && mkdir ../input"
+os.system(command)
+
 # collect repos with cpp files
 collect()
 
