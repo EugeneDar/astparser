@@ -36,8 +36,7 @@ for repo in repos:
         all_allocations += allocations
 
     f = open('logs.txt', "a")
-    f.write(repo)
-    f.write(str(all_allocations))
-    f.write('\n')
+    f.write(repo + '\n')
+    f.write(str(all_allocations) + '\n\n')
     f.close()
 
