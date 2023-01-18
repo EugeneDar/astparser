@@ -10,10 +10,6 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
-os.system('touch ../file.txt')
-while True:
-    a = 1 + 1
-
 # todo add loging here
 collect()
 
@@ -51,3 +47,5 @@ for project_name in projects:
 
 f.close()
 print('Finished')
+while True:
+    a = 1 + 1
