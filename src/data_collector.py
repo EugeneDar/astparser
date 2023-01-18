@@ -3,31 +3,36 @@
 import requests
 import os
 
-def collect ():
+
+# maybe we will need repeat 'gh auth login' in command line
+def collect():
     # remove old data
     command = "rm -rf ../data && mkdir ../data && rm -rf ../input && mkdir ../input"
     os.system(command)
 
-    repos = list()
+    repos = set()
 
     username = "eugenedar"
     token = ""
+    url = 'https://api.github.com/search/repositories?q=language:cpp&page:1&per_page=30'
 
-    r = requests.get('https://api.github.com/search/repositories?q=language:cpp&per_page:500', auth=(username, token))
+    for page in range(1, 5):
 
-    for item in r.json()['items']:
-        size = item['size']  # size in Kb
-        if size > 50000:
-            continue
+        r = requests.get(url, auth=(username, token))
 
-        full_name = item['full_name']
+        for item in r.json()['items']:
+            size = item['size']  # size in Kb
+            if size > 5000:
+                continue
 
-        print("Name = ", full_name, "Size = ", size)
+            full_name = item['full_name']
 
-        # maybe we will need repeat 'gh auth login' in command line
-        command = "gh repo clone " + full_name + " ../data/" + full_name
-        # os.system(command)
+            repos.add(full_name)
 
-        repos.append("../data/" + full_name)
+        url = r.links['next']['url']
+        print(url)
 
-    return repos
+    print('Repos count:', len(repos))
+    for name in repos:
+        command = "gh repo clone " + name + " ../data/" + name
+        os.system(command)

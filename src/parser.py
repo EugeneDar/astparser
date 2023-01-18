@@ -67,5 +67,8 @@ def refactor_all_lines(filename):
 
 
 def parse(filename):
-    lines = refactor_all_lines(filename)
-    return lines
+    try:
+        lines = refactor_all_lines(filename)
+        return lines
+    except:
+        return []

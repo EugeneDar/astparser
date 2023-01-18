@@ -1,6 +1,7 @@
 import numpy as np
 import os
 
+from util import nth_substring
 from parser import parse
 from counter import count_allocations
 from cpp_finder import get_cpps_list
@@ -8,31 +9,39 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
-# collect repos with cpp files
+# todo add loging here
 collect()
 
-# find all cpps
+projects = set()
 cpps = get_cpps_list("../data")
 
-# preprocess (wrap includes)
 for file in cpps:
-    preprocess(file)
+    pos = nth_substring(file, '/', 4)
+    projects.add(file[:pos])
 
-# build ast trees
-ast_names = []
+f = open('results.txt', 'w')
 
-for file in cpps:
-    ast_names.append(build_ast(file))
+for project_name in projects:
+    all_allocations = np.matrix([[0, 0], [0, 0], [0, 0]])
 
-# parse ast trees and count allocations
-all_allocations = np.matrix([[0, 0], [0, 0], [0, 0]])
+    for file in cpps:
+        if not file.startswith(project_name):
+            continue
 
-for ast_name in ast_names:
-    if not os.path.exists(ast_name):
-        continue
+        try:
+            preprocess(file)
+            allocations = count_allocations(parse(build_ast(file)))
+            all_allocations += allocations
+        except:
+            print('Some error')
 
-    allocations = count_allocations(parse(ast_name))
-    all_allocations += allocations
+    object_count = np.sum(all_allocations)
 
-# print results
-print(all_allocations)
+    result = {'objects_count': object_count, 'project_name': project_name[8:],
+              'if_non_heap': all_allocations[0, 0], 'if_heap': all_allocations[0, 1],
+              'loop_non_heap': all_allocations[1, 0], 'loop_heap': all_allocations[1, 1],
+              'linear_non_heap': all_allocations[2, 0], 'linear_heap': all_allocations[2, 1]}
+    print(result, file=f)
+
+f.close()
+print('Finished')
