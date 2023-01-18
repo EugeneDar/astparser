@@ -10,4 +10,5 @@ COPY . .
 ENTRYPOINT ["python3", "./src/main.py"]
 
 # docker build -t app .
-# docker run app
+# docker run -itd app
+# docker exec -it <CONTAINER_ID> sh
