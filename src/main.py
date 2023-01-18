@@ -21,6 +21,7 @@ for file in cpps:
     projects.add(file[:pos])
 
 f = open('results.txt', 'w')
+print('Data beginning', file=f)
 
 for project_name in projects:
     all_allocations = np.matrix([[0, 0], [0, 0], [0, 0]])
