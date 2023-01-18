@@ -48,5 +48,3 @@ for project_name in projects:
 
 f.close()
 print('Finished')
-while True:
-    a = 1 + 1
