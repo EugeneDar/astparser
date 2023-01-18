@@ -1,5 +1,4 @@
 import numpy as np
-import os
 
 from util import nth_substring
 from parser import parse

@@ -25,14 +25,16 @@ def collect():
             if size > 5000:
                 continue
 
+            clone_url = item['clone_url']
             full_name = item['full_name']
 
-            repos.add(full_name)
+            command = "git clone " + clone_url + " ../data/" + full_name
+            os.system(command)
 
         url = r.links['next']['url']
         print(url)
 
-    print('Repos count:', len(repos))
-    for name in repos:
-        command = "gh repo clone " + name + " ../data/" + name
-        os.system(command)
+    # print('Repos count:', len(repos))
+    # for name in repos:
+    #     command = "gh repo clone " + name + " ../data/" + name
+    #     os.system(command)
