@@ -10,6 +10,8 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
+os.system('touch results.txt')
+
 # todo add loging here
 collect()
 
@@ -20,7 +22,6 @@ for file in cpps:
     pos = nth_substring(file, '/', 4)
     projects.add(file[:pos])
 
-os.system('touch results.txt')
 f = open('results.txt', 'w')
 
 for project_name in projects:
