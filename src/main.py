@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 
 from util import nth_substring
@@ -18,6 +20,7 @@ for file in cpps:
     pos = nth_substring(file, '/', 4)
     projects.add(file[:pos])
 
+os.system('touch results.txt')
 f = open('results.txt', 'w')
 
 for project_name in projects:
