@@ -2,7 +2,7 @@ FROM python:3
 
 RUN pip3 install numpy
 RUN pip3 install requests
-RUN apt-get install clang++
+RUN pip install clang
 
 COPY . .
 
