@@ -13,7 +13,7 @@ def collect():
     repos = set()
 
     username = "eugenedar"
-    token = ""
+    token = open("../git_token.txt", "r").readline()
     url = 'https://api.github.com/search/repositories?q=language:cpp&page:1&per_page=30'
 
     for page in range(1, 5):
