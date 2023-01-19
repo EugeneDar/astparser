@@ -10,6 +10,12 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
+f = open('data.txt', 'w')
+print('Some interesting text')
+f.close()
+
+exit(0)
+
 # todo add loging here
 collect()
 
@@ -21,7 +27,6 @@ for file in cpps:
     projects.add(file[:pos])
 
 f = open('results.txt', 'w')
-print('Data beginning', file=f)
 
 for project_name in projects:
     all_allocations = np.matrix([[0, 0], [0, 0], [0, 0]])
@@ -46,7 +51,3 @@ for project_name in projects:
     print(result, file=f)
 
 f.close()
-os.system('touch FINISHED.txt')
-print('Finished')
-while True:
-    a = 1 + 1

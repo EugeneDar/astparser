@@ -16,13 +16,13 @@ def collect():
     token = open("../git_token.txt", "r").readline()
     url = 'https://api.github.com/search/repositories?q=language:cpp&page:1&per_page=30'
 
-    for page in range(1, 5):
+    for page in range(1, 2):
 
         r = requests.get(url, auth=(username, token))
 
         for item in r.json()['items']:
             size = item['size']  # size in Kb
-            if size > 5000:
+            if size > 60000 or size < 3000:
                 continue
 
             clone_url = item['clone_url']
