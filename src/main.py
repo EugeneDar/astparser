@@ -11,7 +11,7 @@ from data_collector import collect
 from preprocessor import preprocess
 
 f = open('data.txt', 'w')
-print('Some interesting text')
+print('Some very interesting text', file=f)
 f.close()
 
 exit(0)
