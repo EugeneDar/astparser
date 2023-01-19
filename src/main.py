@@ -10,6 +10,11 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
+f = open('../data.txt', 'w')
+for i in range(5):
+    print(i, file=f)
+f.close()
+
 f = open('data.txt', 'w')
 print('Some very interesting text', file=f)
 f.close()
