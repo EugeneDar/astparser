@@ -8,4 +8,4 @@ RUN apt-get install clang -y
 COPY . /repo
 
 # sudo docker build -t foo .
-# sudo docker run -it -v /home/eugene/tmp:/data --rm foo python3 repo/src/main.py
+# sudo docker run -it -v /home/eugene/tmp:/result --rm foo python3 repo/src/main.py
