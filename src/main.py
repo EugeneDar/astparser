@@ -47,7 +47,7 @@ for file in cpps:
             str(allocations[2, 1]) + ', ' +
             str(lines_count) + '\n'
         )
-        exit(0)
+
     except:
         print('Some error')
 
