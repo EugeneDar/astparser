@@ -10,49 +10,46 @@ from ast_builder import build_ast
 from data_collector import collect
 from preprocessor import preprocess
 
-f = open('../data.txt', 'w')
-for i in range(5):
-    print(i, file=f)
-f.close()
-
-f = open('data.txt', 'w')
-print('Some very interesting text', file=f)
-f.close()
-
-exit(0)
-
-# todo add loging here
 collect()
 
-projects = set()
-cpps = get_cpps_list("../data")
+cpps = get_cpps_list("/data")
+
+f = open('/result/results.csv', 'w')
+
+f.write('objects_count, file_name, if_non_heap, if_heap, loop_non_heap, loop_heap, linear_non_heap, linear_heap, lines_count\n')
+
+print('Cycle started')
 
 for file in cpps:
-    pos = nth_substring(file, '/', 4)
-    projects.add(file[:pos])
+    try:
+        print('Start file:', file)
+        preprocess(file)
+        ast_name = build_ast(file)
+        allocations = count_allocations(parse(ast_name))
+        print(allocations)
 
-f = open('results.txt', 'w')
+        object_count = np.sum(allocations)
 
-for project_name in projects:
-    all_allocations = np.matrix([[0, 0], [0, 0], [0, 0]])
-
-    for file in cpps:
-        if not file.startswith(project_name):
+        if object_count == 0:
             continue
 
-        try:
-            preprocess(file)
-            allocations = count_allocations(parse(build_ast(file)))
-            all_allocations += allocations
-        except:
-            print('Some error')
+        curr_file = open(file, 'r')
+        lines_count = len(curr_file.readlines())
 
-    object_count = np.sum(all_allocations)
+        f.write(
+            str(object_count) + ', ' +
+            str(file[8:]) + ', ' +
+            str(allocations[0, 0]) + ', ' +
+            str(allocations[0, 1]) + ', ' +
+            str(allocations[1, 0]) + ', ' +
+            str(allocations[1, 1]) + ', ' +
+            str(allocations[2, 0]) + ', ' +
+            str(allocations[2, 1]) + ', ' +
+            str(lines_count) + '\n'
+        )
+        exit(0)
+    except:
+        print('Some error')
 
-    result = {'objects_count': object_count, 'project_name': project_name[8:],
-              'if_non_heap': all_allocations[0, 0], 'if_heap': all_allocations[0, 1],
-              'loop_non_heap': all_allocations[1, 0], 'loop_heap': all_allocations[1, 1],
-              'linear_non_heap': all_allocations[2, 0], 'linear_heap': all_allocations[2, 1]}
-    print(result, file=f)
-
+f.write('Finish')
 f.close()
