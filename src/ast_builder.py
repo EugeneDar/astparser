@@ -4,7 +4,7 @@ import os
 import random
 
 def build_ast(source_name):
-    output_name = '../input/' + os.path.basename(source_name) + '___' + str(random.random())
+    output_name = '/input/' + os.path.basename(source_name) + '___' + str(random.random())
     print(output_name)
     command = 'clang++ -Xclang -ast-dump -fsyntax-only ' + source_name + ' -fno-diagnostics-color > ' + output_name
     os.system(command)
